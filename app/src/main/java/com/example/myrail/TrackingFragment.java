@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class TrackingFragment extends Fragment {
 
-    private TextView source_code,destination_code;
+    private TextView source_code,destination_code,textViewIcon;
     private AutoCompleteTextView source,destination,train_name_no;
     private ImageButton train_search, exchange;
     private Button submit;
@@ -41,7 +42,7 @@ public class TrackingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Context context = getContext();
             View v = inflater.inflate(R.layout.fragment_tracking,container,false);
-
+            View v1 = inflater.inflate(R.layout.sd_select,container,false);
             String[] station = {"Anand","Vadodara","Ahmedabad","Ajmer","Abu","Nadiad","Ankleshwar","America"};
             source = v.findViewById(R.id.source);
             destination = v.findViewById(R.id.destination);
@@ -52,11 +53,18 @@ public class TrackingFragment extends Fragment {
             source_code = v.findViewById(R.id.source_code);
             destination_code = v.findViewById(R.id.destination_code);
 
-
-
-
             InputStream inputStream = context.getResources().openRawResource(R.raw.stations);
             fillStationList(inputStream);
+
+            source.setOnItemClickListener((adapterView, view, i, l) -> {
+                    textViewIcon = view.findViewById(R.id.sug_icon_text);
+                    source_code.setText(textViewIcon.getText());
+            });
+
+            destination.setOnItemClickListener((adapterView, view, i, l) -> {
+                textViewIcon = view.findViewById(R.id.sug_icon_text);
+                    destination_code.setText(textViewIcon.getText());
+            });
 
             exchange.setOnClickListener(view -> {
                 String s = source.getText().toString();
@@ -74,6 +82,24 @@ public class TrackingFragment extends Fragment {
                 }
             });
 
+            submit.setOnClickListener(view -> {
+                Intent intent = new Intent(getActivity(), TrainList.class);
+                String s=source.getText().toString(), d=destination.getText().toString();
+                if(!s.isEmpty() && !d.isEmpty()){
+                    startActivity(intent);
+                }
+                else if(s.isEmpty() && d.isEmpty()){
+                    Toast.makeText(context,"Enter Source and Destination.", Toast.LENGTH_SHORT).show();
+                }
+                else if(s.isEmpty()){
+                    Toast.makeText(context,"Enter the Source.", Toast.LENGTH_SHORT).show();
+                } else if (d.isEmpty()) {
+                    Toast.makeText(context,"Enter the Destination.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(context,"Enter Valid Station.", Toast.LENGTH_SHORT).show();
+                }
+            });
             AutoStationItemAdapter adapter = new AutoStationItemAdapter(context, StationList);
             source.setAdapter(adapter);
             destination.setAdapter(adapter);

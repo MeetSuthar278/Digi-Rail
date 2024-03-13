@@ -29,7 +29,7 @@
                 android:layout_height="16dp"
                 android:fontFamily="@font/nunito_black"
                 android:paddingTop="2sp"
-                android:text="ANND"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="10sp" />
 

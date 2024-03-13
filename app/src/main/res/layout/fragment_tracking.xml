@@ -92,7 +92,7 @@
                         android:layout_height="16dp"
                         android:fontFamily="@font/nunito_black"
                         android:paddingTop="2sp"
-                        android:text="ANND"
+                        android:text="SRC"
                         android:textAlignment="center"
                         android:textSize="10sp" />
 
@@ -137,7 +137,7 @@
                         android:layout_height="16dp"
                         android:layout_alignParentTop="true"
                         android:fontFamily="@font/nunito_black"
-                        android:text="BRC"
+                        android:text="DST"
                         android:paddingTop="2sp"
                         android:textAlignment="center"
                         android:textSize="10sp" />
