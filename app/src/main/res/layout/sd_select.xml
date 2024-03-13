@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@color/dblue"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="5sp">
+
+            <ImageView
+                android:id="@+id/sug_station_icon"
+                android:layout_width="42dp"
+                android:layout_height="30.56dp"
+                android:layout_gravity="center"
+                android:src="@drawable/station_icon" />
+
+            <TextView
+                android:id="@+id/sug_icon_text"
+                android:layout_width="42dp"
+                android:layout_height="16dp"
+                android:fontFamily="@font/nunito_black"
+                android:paddingTop="2sp"
+                android:text="ANND"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+    <TextView
+        android:id="@+id/sug_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/nunito"
+        android:layout_toEndOf="@+id/icon"
+        android:gravity="center_vertical"
+        android:text="hello" />
+
+
+    </LinearLayout>
+</LinearLayout>

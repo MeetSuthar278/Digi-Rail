@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
+    tools:context=".TrackingFragment">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:text="SEARCH YOUR TRAIN"
+        android:textColor="@color/white"
+        android:textSize="29dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+    android:id="@+id/lin_Train_Name_No"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/label"
+    android:layout_marginTop="15dp"
+    android:gravity="center">
+
+        <AutoCompleteTextView
+            android:id="@+id/train_name_no"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/t_search"
+            android:fontFamily="@font/nunito"
+            android:hint="Train Name or Train No."
+            android:textColor="@color/blue2"
+            android:textColorHint="@color/blue2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="18dp" />
+
+        <ImageButton
+            android:id="@+id/train_Search"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/t_submit"
+            android:src="@drawable/search_svgrepo_com__1_"
+            android:textColor="@color/blue"
+            android:contentDescription="TODO" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/lin_Train_Name_No"
+        android:layout_marginTop="30dp"
+        android:background="@color/lblue">
+
+
+        <LinearLayout
+            android:id="@+id/window"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/sd_search"
+            android:divider="@color/white"
+            android:showDividers="middle"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingTop="5sp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="30.56dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/station_icon" />
+
+                    <TextView
+                        android:id="@+id/source_code"
+                        android:layout_width="42dp"
+                        android:layout_height="16dp"
+                        android:fontFamily="@font/nunito_black"
+                        android:paddingTop="2sp"
+                        android:text="ANND"
+                        android:textAlignment="center"
+                        android:textSize="10sp" />
+
+                </RelativeLayout>
+
+                <AutoCompleteTextView
+                    android:id="@+id/source"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="-52dp"
+                    android:paddingStart="62dp"
+                    android:minLines="4"
+                    android:fontFamily="@font/nunito"
+                    android:completionThreshold="1"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@android:color/transparent"
+                    android:hint="Source"
+                    android:dropDownHeight="174dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingTop="5sp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="30.56dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/station_icon" />
+
+                    <TextView
+                        android:id="@+id/destination_code"
+                        android:layout_width="42dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/nunito_black"
+                        android:text="BRC"
+                        android:paddingTop="2sp"
+                        android:textAlignment="center"
+                        android:textSize="10sp" />
+                </RelativeLayout>
+
+                <AutoCompleteTextView
+                    android:id="@+id/destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="-52dp"
+                    android:paddingStart="62dp"
+                    android:completionThreshold="1"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@android:color/transparent"
+                    android:hint="Destination"
+                    android:dropDownHeight="174dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/submit"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="20dp"
+                android:textColor="@color/dblue"
+                android:text="Submit" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/exchange"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="285dp"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/xchange"
+            android:src="@drawable/exchange_svgrepo_com__1_"
+            android:contentDescription="TODO" />
+    </FrameLayout>
+</RelativeLayout>
