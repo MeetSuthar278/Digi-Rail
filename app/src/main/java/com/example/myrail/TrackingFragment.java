@@ -1,5 +1,7 @@
 package com.example.myrail;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +19,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,20 +33,29 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class TrackingFragment extends Fragment {
 
-    private TextView source_code,destination_code,textViewIcon;
+    private TextView source_code,destination_code,textViewIcon,label;
     private AutoCompleteTextView source,destination,train_name_no;
     private ImageButton train_search, exchange;
     private Button submit;
     private  String st;
     private List<StationItem> StationList;
-
+    private ListView train_name_dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Context context = getContext();
             View v = inflater.inflate(R.layout.fragment_tracking,container,false);
             View v1 = inflater.inflate(R.layout.sd_select,container,false);
+            View v2 = inflater.inflate(R.layout.train_dialog,container,false);
             String[] station = {"Anand","Vadodara","Ahmedabad","Ajmer","Abu","Nadiad","Ankleshwar","America"};
             source = v.findViewById(R.id.source);
             destination = v.findViewById(R.id.destination);
@@ -52,9 +65,46 @@ public class TrackingFragment extends Fragment {
             submit = v.findViewById(R.id.submit);
             source_code = v.findViewById(R.id.source_code);
             destination_code = v.findViewById(R.id.destination_code);
+            label = v.findViewById(R.id.label);
+            //train_name_dialog = v2.findViewById(R.id.train_name_dialog);
+//            train_name_no.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                    String searchText = charSequence.toString();
+//                    if (!searchText.isEmpty()) {
+//                        makeApiRequest(searchText);
+//                    }
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable editable) {
+//
+//                }
+//            });
+
+
+            train_search.setOnClickListener(view -> {
+                String searchText = train_name_no.getText().toString();
+                if(searchText.isEmpty()){
+                    Toast.makeText(context,"Enter Train Name or Number.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    makeApiRequest(searchText);
+                }
+            });
+
+
 
             InputStream inputStream = context.getResources().openRawResource(R.raw.stations);
+
+
             fillStationList(inputStream);
+
 
             source.setOnItemClickListener((adapterView, view, i, l) -> {
                     textViewIcon = view.findViewById(R.id.sug_icon_text);
@@ -137,5 +187,69 @@ public class TrackingFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void makeApiRequest(String searchText) {
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create("{\"search\": \"" + searchText + "\"}", mediaType);
+        Request request = new Request.Builder()
+                .url("https://trains.p.rapidapi.com/")
+                .post(body)
+                .addHeader("content-type", "application/json")
+                .addHeader("X-RapidAPI-Key", "34fb2eabf9msh6af036478913763p13a2e1jsnc15f990dfbf6")
+                .addHeader("X-RapidAPI-Host", "trains.p.rapidapi.com")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.e("Api", "IOException: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        String responseBody = response.body().string();
+                        JSONArray jsonArray = new JSONArray(responseBody);
+                        // Assuming jsonArray contains suggestions for train names
+                        final List<String> trainNames = new ArrayList<>();
+                        final List<String> trainNo = new ArrayList<>();
+                        final List<TrainDialogList> trains = new ArrayList<>();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject trainObject = jsonArray.getJSONObject(i);
+                            String name = trainObject.getString("name");
+                            String tnum = trainObject.getString("train_num");
+                            trains.add(new TrainDialogList(name,tnum));
+                        }
+                        // Update UI with the suggestions
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                if(trains.isEmpty()){
+                                    Toast.makeText(getContext(),"Please enter valid Train Details",Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    final Dialog dialog = new Dialog(getContext());
+                                    dialog.setContentView(R.layout.train_dialog);
+                                    dialog.setTitle("Available Trains");
+                                    TrainDialogAdapter adapter = new TrainDialogAdapter(getContext(), trains);
+                                    train_name_dialog = dialog.findViewById(R.id.train_name_dialog);
+                                    train_name_dialog.setAdapter(adapter);
+                                    dialog.show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        Log.e("Api", "JSONException: " + e.getMessage());
+                    }
+                } else {
+                    Log.e("Api", "Error: " + response.code() + " " + response.message());
+                }
+            }
+        });
     }
 }

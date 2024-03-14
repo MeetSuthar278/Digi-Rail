@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_tnum"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:fontFamily="@font/nunito_bold"
+        android:textSize="12sp"
+        android:textColor="@color/grey"
+        android:background="@drawable/dialog_tnum_bg"
+        />
+
+    <TextView
+        android:id="@+id/dialog_tname"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="10dp"
+        android:fontFamily="@font/nunito"
+        android:textSize="18dp"
+        android:maxLines="1"
+        android:textColor="@color/dblue"
+        android:gravity="center_vertical"/>
+</LinearLayout>
