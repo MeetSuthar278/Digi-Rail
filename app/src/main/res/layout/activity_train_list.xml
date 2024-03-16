@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:background="@drawable/sd_select_bg"
     tools:context=".TrainList">
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/src_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/grey"
+            android:text=""
+            android:layout_marginRight="5dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next_long_arrow_right_svgrepo_com"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/dst_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/grey"
+            android:layout_marginLeft="5dp"
+            android:text=""/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/train_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sd_select_bg"/>
+</LinearLayout>

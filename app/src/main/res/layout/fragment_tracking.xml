@@ -16,6 +16,7 @@
         android:gravity="center"
         android:text="SEARCH YOUR TRAIN"
         android:textColor="@color/white"
+        android:maxLines="1"
         android:textSize="29dp"
         android:textStyle="bold" />
 
@@ -111,6 +112,7 @@
                     android:textColorHint="@color/grey"
                     android:background="@android:color/transparent"
                     android:hint="Source"
+                    android:maxLines="1"
                     android:dropDownHeight="174dp" />
             </LinearLayout>
 
@@ -155,6 +157,7 @@
                     android:textColorHint="@color/grey"
                     android:background="@android:color/transparent"
                     android:hint="Destination"
+                    android:maxLines="1"
                     android:dropDownHeight="174dp"/>
             </LinearLayout>
 

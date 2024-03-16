@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -66,27 +67,6 @@ public class TrackingFragment extends Fragment {
             source_code = v.findViewById(R.id.source_code);
             destination_code = v.findViewById(R.id.destination_code);
             label = v.findViewById(R.id.label);
-            //train_name_dialog = v2.findViewById(R.id.train_name_dialog);
-//            train_name_no.addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//                }
-//
-//                @Override
-//                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                    String searchText = charSequence.toString();
-//                    if (!searchText.isEmpty()) {
-//                        makeApiRequest(searchText);
-//                    }
-//                }
-//
-//                @Override
-//                public void afterTextChanged(Editable editable) {
-//
-//                }
-//            });
-
 
             train_search.setOnClickListener(view -> {
                 String searchText = train_name_no.getText().toString();
@@ -133,9 +113,14 @@ public class TrackingFragment extends Fragment {
             });
 
             submit.setOnClickListener(view -> {
-                Intent intent = new Intent(getActivity(), TrainList.class);
                 String s=source.getText().toString(), d=destination.getText().toString();
                 if(!s.isEmpty() && !d.isEmpty()){
+                    Intent intent = new Intent(getActivity(), TrainList.class);
+                    intent.putExtra("Src",s);
+                    intent.putExtra("Dst",d);
+                    intent.putExtra("sc",source_code.getText().toString());
+                    intent.putExtra("dc", destination_code.getText().toString());
+                    Log.d("intent", "onCreateView: "+s+" and "+d);
                     startActivity(intent);
                 }
                 else if(s.isEmpty() && d.isEmpty()){
@@ -240,6 +225,13 @@ public class TrackingFragment extends Fragment {
                                     train_name_dialog = dialog.findViewById(R.id.train_name_dialog);
                                     train_name_dialog.setAdapter(adapter);
                                     dialog.show();
+                                    train_name_dialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                            Intent intent = new Intent(getActivity(), LiveTrain.class);
+                                            startActivity(intent);
+                                        }
+                                    });
                                 }
                             }
                         });

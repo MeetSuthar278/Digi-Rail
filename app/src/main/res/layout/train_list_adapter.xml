@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+    <TextView
+        android:id="@+id/trainlist_tnum"
+        android:layout_marginLeft="5dp"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="@font/nunito_black"
+        android:textSize="12sp"
+        android:text="12010"
+        android:textColor="@color/black"
+        android:background="@drawable/trainlistadapter_tnum_bg"/>
+
+    <TextView
+        android:id="@+id/trainlist_tname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Intercity Express"
+        android:maxLines="1"
+        android:textSize="20dp"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/dblue"
+        android:layout_marginLeft="5dp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/trainlist_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:fontFamily="@font/nunito_bold"
+        android:maxLines="1"
+        android:textColor="@color/blue2"
+        android:text="19:00 - 20:00"
+        android:gravity="end" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/m"
+                android:layout_width="13sp"
+                android:layout_height="18dp"
+                android:text="M"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:fontFamily="@font/nunito_black"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/tu"
+                android:layout_width="13sp"
+                android:layout_height="18dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/nunito_black"
+                android:text="T"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/w"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/nunito_black"
+                android:text="W"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/th"
+                android:layout_width="13sp"
+                android:layout_height="18dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/nunito_black"
+                android:text="T"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/f"
+                android:layout_width="13sp"
+                android:layout_height="18dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/nunito_black"
+                android:text="F"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/sa"
+                android:layout_width="13sp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:fontFamily="@font/nunito_black"
+                android:text="S"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/su"
+                android:layout_width="13sp"
+                android:layout_height="18dp"
+                android:gravity="center"
+                android:text="S"
+                android:textAlignment="center"
+                android:fontFamily="@font/nunito_black"
+                android:background="@drawable/days_bg"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
