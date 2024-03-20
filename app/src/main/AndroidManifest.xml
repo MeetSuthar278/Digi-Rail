@@ -15,6 +15,9 @@
         android:theme="@style/Base.Theme.MyRail"
         tools:targetApi="31">
         <activity
+            android:name=".IrctcWeb"
+            android:exported="false" />
+        <activity
             android:name=".LiveTrain"
             android:exported="false" />
         <activity

@@ -14,7 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -46,6 +48,10 @@ public class TrainList extends AppCompatActivity {
         src_label.setText(src);
         dst_label.setText(dst);
 
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(today);
+
         ArrayList<TrainListPage> trainlistpage = new ArrayList<>();
 //        dummytraindata(trainlistpage);
 
@@ -55,10 +61,16 @@ public class TrainList extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
+        train_list.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent1 = new Intent(this,LiveTrain.class);
+            intent1.putExtra("train_name",trainlistpage.get(i).getTrainName());
+            intent1.putExtra("train_no",trainlistpage.get(i).getTrainNumber());
+            startActivity(intent1);
+        });
 
         // ----------------------------MAIN API TO BE USED----------------------------------- //
 //        try {
-//           makeapirequest(trainlistpage,sc,dc);
+//           makeapirequest(trainlistpage,sc,dc,formattedDate);
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
@@ -66,11 +78,11 @@ public class TrainList extends AppCompatActivity {
 
     }
 
-    private void makeapirequest(ArrayList<TrainListPage> trainlistpage, String sc, String dc) throws IOException {
+    private void makeapirequest(ArrayList<TrainListPage> trainlistpage, String sc, String dc,String formattedDate) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url("https://irctc1.p.rapidapi.com/api/v3/trainBetweenStations?fromStationCode=" + sc + "&toStationCode=" + dc + "&dateOfJourney=2024-03-16")
+                .url("https://irctc1.p.rapidapi.com/api/v3/trainBetweenStations?fromStationCode=" + sc + "&toStationCode=" + dc + "&dateOfJourney="+formattedDate)
                 .get()
                 .addHeader("X-RapidAPI-Key", "34fb2eabf9msh6af036478913763p13a2e1jsnc15f990dfbf6")
                 .addHeader("X-RapidAPI-Host", "irctc1.p.rapidapi.com")

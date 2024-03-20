@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResevationFragment">
+    tools:context=".ResevationFragment"
+    android:background="@drawable/background">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/res_label"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Reservation Fragmenty" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:text="TRAIN RESERVATION"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:textSize="29dp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/irctc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/res_label"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/dialog_tnum_bg"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center"
+        android:text="IRCTC BOOkING"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+</RelativeLayout>

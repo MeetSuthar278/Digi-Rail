@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/action_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digi Rail"
+        android:fontFamily="@font/nunito_bold"
+        android:textColor="@color/dblue"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/baseline_add_box_24"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp" />
+
+</RelativeLayout>

@@ -7,16 +7,371 @@
     android:background="@drawable/background"
     tools:context=".LiveTrain">
 
-    <TextView
-        android:id="@+id/livelabel"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/dblue">
+
+        <TextView
+            android:id="@+id/live_trainno"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="12010"
+            android:gravity="center"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
+            android:background="@drawable/dialog_tnum_bg"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/live_trainname"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Intercity Express"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:layout_marginLeft="7.5dp"/>
+
+        <TextView
+            android:id="@+id/live_traindate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_gravity="center"
+            android:text="17-03-2024"
+            android:layout_marginRight="15dp"
+            android:textSize="18dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/sd_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/nunito_bold"
+        android:layout_marginTop="80dp">
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/live_display_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="1.5dp"
+                android:layout_marginLeft="5dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="5sp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="30.56dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/station_icon" />
+
+                    <TextView
+                        android:layout_width="42dp"
+                        android:layout_height="16dp"
+                        android:fontFamily="@font/nunito_black"
+                        android:text="SRC"
+                        android:textAlignment="center"
+                        android:paddingTop="2sp"
+                        android:textSize="10sp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/srcstation"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:text="Station Name"
+                    android:fontFamily="@font/nunito"
+                    android:maxLines="1"
+                    android:textColor="@color/dblue"
+                    android:textSize="18dp"
+                    />
+                <TextView
+                    android:id="@+id/srctime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:text="19:00"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textColor="@color/dblue"
+                    android:textSize="16dp"
+                    android:layout_marginRight="18dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="5sp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="30.56dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/station_icon" />
+
+                    <TextView
+                        android:layout_width="39dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_black"
+                        android:paddingTop="2sp"
+                        android:text="DST"
+                        android:textAlignment="center"
+                        android:textSize="10sp" />
+
+
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/dststation"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:text="Station Name"
+                    android:fontFamily="@font/nunito"
+                    android:maxLines="1"
+                    android:textColor="@color/dblue"
+                    android:textSize="18dp"
+                    />
+                <TextView
+                    android:id="@+id/dsttime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:text="19:00"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textColor="@color/dblue"
+                    android:textSize="16dp"
+                    android:layout_marginRight="18dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/cur_loc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sd_frame"
+        android:layout_marginTop="20dp">
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/live_display_bg">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CURRENT LOCATION"
+            android:textAlignment="center"
+            android:textSize="22dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/dblue"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/currentmessage"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:text="Crossed Sabarmati cabin station at 19:40"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/blue2"
+            android:paddingBottom="15dp"/>
+
+    </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/next_previous_station"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cur_loc">
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp"
+            android:background="@drawable/live_display_bg">
+
+            <TextView
+                android:id="@+id/nplabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PREVIOUS STATION"
+                android:textAlignment="center"
+                android:textSize="22dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/dblue"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingTop="2sp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="30.56dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/station_icon" />
+
+                    <TextView
+                        android:id="@+id/npsourcecode"
+                        android:layout_width="42dp"
+                        android:layout_height="13.5dp"
+                        android:fontFamily="@font/nunito_black"
+                        android:text="SRC"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="8sp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/npstationname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_gravity="center"
+                    android:text="Station Name"
+                    android:fontFamily="@font/nunito"
+                    android:maxLines="1"
+                    android:textColor="@color/dblue"
+                    android:textSize="16dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="17sp"
+                    android:text="ARRIVAL"
+                    android:gravity="center"
+                    android:fontFamily="@font/nunito_bold"
+                    android:background="@drawable/live_ad"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/dblue"
+                    android:fontFamily="@font/nunito_bold"/>
+                <TextView
+                    android:id="@+id/arrival_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19:30"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textColor="@color/dblue"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:layout_width="67dp"
+                    android:layout_height="17sp"
+                    android:text="DEPARTURE"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/nunito_bold"
+                    android:background="@drawable/live_ad"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/dblue"
+                    android:fontFamily="@font/nunito_bold"/>
+                <TextView
+                    android:id="@+id/dept_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19:30"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textColor="@color/dblue"
+                    android:textSize="16dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="LIVE TRAIN"
-        android:textColor="@color/white"
-        android:maxLines="1"
-        android:textSize="29dp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/next_previous_station"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/prev_station"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Previous"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/dblue"
+            android:background="@drawable/live_prev_bg"/>
+        <Button
+            android:id="@+id/next_station"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/dblue"
+            android:background="@drawable/live_next_bg"/>
+    </LinearLayout>
 </RelativeLayout>
