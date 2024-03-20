@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -20,6 +21,9 @@ public class IrctcWeb extends AppCompatActivity {
 
         web = findViewById(R.id.web);
         pgBar = findViewById(R.id.pgBar);
+
+        WebSettings webSettings = web.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
         web.loadUrl("https://www.irctc.co.in/nget/train-search");
 //        web.loadUrl("https://www.google.com");
