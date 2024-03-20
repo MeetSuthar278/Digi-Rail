@@ -24,7 +24,7 @@ public class ResevationFragment extends Fragment {
         irctc = v.findViewById(R.id.irctc);
 
         irctc.setOnClickListener(view -> {
-            Intent i = new Intent(getActivity(),IrctcWeb.class);
+            Intent i = new Intent(getActivity(), IrctcReservationWebview.class);
             startActivity(i);
         });
 
