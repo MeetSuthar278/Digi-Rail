@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-public class IrctcWeb extends AppCompatActivity {
+public class IrctcReservationWebview extends AppCompatActivity {
 
     WebView web;
     ProgressBar pgBar;

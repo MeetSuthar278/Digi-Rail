@@ -14,7 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
 
     TrackingFragment tf = new TrackingFragment();
-    ResevationFragment rf = new ResevationFragment();
+    ReservationFragment rf = new ReservationFragment();
     MonitorFragment mf = new MonitorFragment();
     BottomNavigationView bn;
     TextView dt;

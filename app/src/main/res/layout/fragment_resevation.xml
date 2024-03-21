@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResevationFragment"
+    tools:context=".ReservationFragment"
     android:background="@drawable/background">
 
     <TextView
@@ -35,4 +35,12 @@
         android:text="IRCTC BOOkING"
         android:textColor="@color/black"
         android:textSize="18dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bigtrain"
+        />
 </RelativeLayout>
