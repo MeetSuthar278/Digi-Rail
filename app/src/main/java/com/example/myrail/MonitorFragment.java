@@ -115,9 +115,9 @@ public class MonitorFragment extends Fragment {
                                     train_name_dialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                            Intent intent = new Intent(getActivity(), LiveTrain.class);
-                                            intent.putExtra("train_name",trains.get(i).getTName());
-                                            intent.putExtra("train_no",trains.get(i).getTNumber());
+                                            Intent intent = new Intent(getActivity(), MonitoringTrain.class);
+//                                            intent.putExtra("train_name",trains.get(i).getTName());
+//                                            intent.putExtra("train_no",trains.get(i).getTNumber());
                                             startActivity(intent);
                                         }
                                     });
