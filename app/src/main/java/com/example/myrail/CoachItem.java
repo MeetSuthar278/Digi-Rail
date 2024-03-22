@@ -2,18 +2,22 @@ package com.example.myrail;
 
 public class CoachItem {
     private int imageResource;
-    private String text;
+    private String cid,cno;
 
-    public CoachItem(int imageResource, String text) {
+    public CoachItem(int imageResource, String cid, String cno) {
         this.imageResource = imageResource;
-        this.text = text;
+        this.cid = cid;
+        this.cno = cno;
     }
 
     public int getImageResource() {
         return imageResource;
     }
 
-    public String getText() {
-        return text;
+    public String getCid() {
+        return cid;
+    }
+    public String getCno() {
+        return cno;
     }
 }

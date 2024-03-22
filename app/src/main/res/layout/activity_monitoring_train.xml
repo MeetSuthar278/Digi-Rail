@@ -14,4 +14,27 @@
         android:layout_height="wrap_content"
         android:background="@color/grey"
         android:orientation="horizontal"/>
+
+    <TextView
+        android:id="@+id/mtr_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coach_list"
+        android:layout_marginTop="120dp"
+        android:text=""
+        android:textSize="120dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/nunito_bold"
+        android:textColor="@color/yellow"
+        />
+   <TextView
+       android:id="@+id/mtr_des"
+       android:layout_width="250dp"
+       android:layout_height="wrap_content"
+       android:text=""
+       android:layout_below="@+id/mtr_data"
+       android:layout_centerHorizontal="true"
+       android:textColor="@color/grey"
+       android:fontFamily="@font/nunito_bold"
+       android:textAlignment="center"/>
 </RelativeLayout>
