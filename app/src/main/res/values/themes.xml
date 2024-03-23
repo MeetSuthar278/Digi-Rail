@@ -1,14 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyRail" parent="Theme.AppCompat.Light">
+    <style name="Base.Theme.MyRail" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimaryDark">@color/black</item>
-        <item name="colorPrimary">@color/grey</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="actionBarSize">60dp</item>
         <item name="actionBarStyle">@style/Base.Theme.MyRail</item>
+        <item name="android:navigationBarColor">@color/grey</item>
     </style>
 
     <style name="Theme.MyRail" parent="Base.Theme.MyRail" >
         <item name="android:layout">@layout/action_bar</item>
+        <item name="android:navigationBarColor">@color/grey</item>
     </style>
 </resources>

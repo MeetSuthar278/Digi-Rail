@@ -15,6 +15,9 @@
         android:theme="@style/Base.Theme.MyRail"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".MonitoringTrain"
             android:exported="false" />
         <activity
@@ -27,7 +30,8 @@
             android:name=".TrainList"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.Design.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

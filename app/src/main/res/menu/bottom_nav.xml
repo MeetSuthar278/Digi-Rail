@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/Tracking"
-             android:icon="@drawable/location_filled_svgrepo_com"/>
+             android:icon="@drawable/location_filled_svgrepo_com" />
     <item android:id="@+id/Reserve"
              android:icon="@drawable/ticket_5_svgrepo_com"/>
     <item android:id="@+id/Monitor"
