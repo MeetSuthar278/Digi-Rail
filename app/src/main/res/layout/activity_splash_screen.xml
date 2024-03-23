@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/splash_bg"
     tools:context=".SplashScreen">
+
     <TextView
         android:id="@+id/res_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_below="@+id/tlogo"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"
-        android:text="DigiRail"
-        android:textColor="@color/white"
         android:maxLines="1"
+        android:text="Digi Rail"
+        android:textColor="#202C99"
         android:textSize="40dp"
-        android:textStyle="bold" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bigtrain"
-        />
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tlogo" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/tlogo"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/tlogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.395" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
