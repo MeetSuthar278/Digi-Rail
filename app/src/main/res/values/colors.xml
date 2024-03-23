@@ -9,5 +9,6 @@
     <color name="yellow">#FFD301</color>
     <color name="dyellow">#FFB921</color>
     <color name="grey">#E5E5E5</color>
+    <color name="dgrey">#323232</color>
     <color name="red">#D60101</color>
 </resources>

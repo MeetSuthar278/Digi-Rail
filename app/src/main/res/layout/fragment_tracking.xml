@@ -94,6 +94,7 @@
                         android:fontFamily="@font/nunito_black"
                         android:paddingTop="2sp"
                         android:text="SRC"
+                        android:textColor="@color/dgrey"
                         android:textAlignment="center"
                         android:textSize="10sp" />
 
@@ -140,6 +141,7 @@
                         android:layout_alignParentTop="true"
                         android:fontFamily="@font/nunito_black"
                         android:text="DST"
+                        android:textColor="@color/dgrey"
                         android:paddingTop="2sp"
                         android:textAlignment="center"
                         android:textSize="10sp" />

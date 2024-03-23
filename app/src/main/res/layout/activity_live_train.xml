@@ -86,6 +86,7 @@
                         android:layout_height="16dp"
                         android:fontFamily="@font/nunito_black"
                         android:text="SRC"
+                        android:textColor="@color/dgrey"
                         android:textAlignment="center"
                         android:paddingTop="2sp"
                         android:textSize="10sp" />
@@ -143,6 +144,7 @@
                         android:fontFamily="@font/nunito_black"
                         android:paddingTop="2sp"
                         android:text="DST"
+                        android:textColor="@color/dgrey"
                         android:textAlignment="center"
                         android:textSize="10sp" />
 
@@ -263,6 +265,7 @@
                         android:layout_height="13.5dp"
                         android:fontFamily="@font/nunito_black"
                         android:text="SRC"
+                        android:textColor="@color/dgrey"
                         android:gravity="center"
                         android:textAlignment="center"
                         android:textSize="8sp" />
