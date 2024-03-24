@@ -14,7 +14,7 @@
     android:background="@color/dblue"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:title="DigiRail">
+    app:title="Digi Rail">
 </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/grey"
         app:itemIconTint="@color/dblue"
-        app:itemPaddingTop="20dp"
+        android:paddingTop="8dp"
         app:menu="@menu/bottom_nav"/>
 
 

@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         bn = findViewById(R.id.bottom_nav);
         if(savedInstanceState == null){
         getSupportFragmentManager().beginTransaction().replace(R.id.container,tf).commit();

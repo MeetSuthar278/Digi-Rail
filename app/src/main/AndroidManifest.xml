@@ -14,24 +14,37 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.MyRail"
         tools:targetApi="31">
+
+
+
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
+
         <activity
             android:name=".MonitoringTrain"
+            android:screenOrientation="portrait"
             android:exported="false" />
+
         <activity
             android:name=".IrctcReservationWebview"
+            android:screenOrientation="portrait"
             android:exported="false" />
+
         <activity
             android:name=".LiveTrain"
+            android:screenOrientation="portrait"
             android:exported="false" />
+
         <activity
             android:name=".TrainList"
+            android:screenOrientation="portrait"
             android:exported="false" />
+
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.Design.NoActionBar"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,6 +6,6 @@
     <item android:id="@+id/Reserve"
              android:icon="@drawable/ticket_5_svgrepo_com"/>
     <item android:id="@+id/Monitor"
-        android:icon="@drawable/baseline_airline_seat_recline_extra_24"/>
+        android:icon="@drawable/baseline_airline_seat_recline_extra_24" />
 
 </menu>
