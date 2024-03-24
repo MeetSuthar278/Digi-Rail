@@ -60,6 +60,8 @@ public class LiveTrain extends AppCompatActivity {
 
         Intent intent = getIntent();
         String train_name = intent.getStringExtra("train_name");
+        boolean liveapi = intent.getBooleanExtra("liveapi",false);
+        Log.d("lapi", "onCreateView: "+liveapi);
 //        String train_no = intent.getStringExtra("train_no");
         String train_no = "20960";
 
@@ -73,16 +75,17 @@ public class LiveTrain extends AppCompatActivity {
         String formattedDate = sdf.format(today);
         live_traindate.setText(formattedDate);
 
-// ----------------------------MAIN API TO BE USED----------------------------------- //
-//        makeApiRequest(train_no);
 
-        try {
-            makejsonrequest(train_no);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+        if(liveapi == true) {
+            //makeApiRequest(train_no);
+            currentmessage.setText("True");
+        } else {
+            try {
+                makejsonrequest(train_no);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }
-
-
     }
 
     void makeApiRequest(String train_no){

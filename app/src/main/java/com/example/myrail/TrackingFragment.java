@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,12 +53,11 @@ public class TrackingFragment extends Fragment {
     private  String st;
     private List<StationItem> StationList;
     private ListView train_name_dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             Context context = getContext();
             View v = inflater.inflate(R.layout.fragment_tracking,container,false);
-            View v1 = inflater.inflate(R.layout.sd_select,container,false);
-            View v2 = inflater.inflate(R.layout.train_dialog,container,false);
             String[] station = {"Anand","Vadodara","Ahmedabad","Ajmer","Abu","Nadiad","Ankleshwar","America"};
             source = v.findViewById(R.id.source);
             destination = v.findViewById(R.id.destination);
@@ -67,14 +68,27 @@ public class TrackingFragment extends Fragment {
             source_code = v.findViewById(R.id.source_code);
             destination_code = v.findViewById(R.id.destination_code);
             label = v.findViewById(R.id.label);
+            boolean liveapi = false;
 
-            train_search.setOnClickListener(view -> {
+
+
+        Bundle args = getArguments();
+        if (args != null) {
+            liveapi = args.getBoolean("liveapi", false);
+            Log.d("lapi", "onCreateView: "+liveapi);
+        } else {
+            liveapi = false;
+        }
+
+
+        boolean finalLiveapi = liveapi;
+        train_search.setOnClickListener(view -> {
                 String searchText = train_name_no.getText().toString();
                 if(searchText.isEmpty()){
                     Toast.makeText(context,"Enter Train Name or Number.",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    makeApiRequest(searchText);
+                    makeApiRequest(searchText, finalLiveapi);
                 }
             });
 
@@ -114,12 +128,13 @@ public class TrackingFragment extends Fragment {
 
             submit.setOnClickListener(view -> {
                 String s=source.getText().toString(), d=destination.getText().toString();
-                if(!s.isEmpty() && !d.isEmpty()){
+                if(!s.isEmpty() && !d.isEmpty() && !s.equals(d)){
                     Intent intent = new Intent(getActivity(), TrainList.class);
                     intent.putExtra("Src",s);
                     intent.putExtra("Dst",d);
                     intent.putExtra("sc",source_code.getText().toString());
                     intent.putExtra("dc", destination_code.getText().toString());
+                    intent.putExtra("liveapi",finalLiveapi);
                     Log.d("intent", "onCreateView: "+s+" and "+d);
                     startActivity(intent);
                 }
@@ -130,11 +145,13 @@ public class TrackingFragment extends Fragment {
                     Toast.makeText(context,"Enter the Source.", Toast.LENGTH_SHORT).show();
                 } else if (d.isEmpty()) {
                     Toast.makeText(context,"Enter the Destination.", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                }else if (s.equals(d)) {
+                    Toast.makeText(context,"Arrival & Destination cannot be same.", Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(context,"Enter Valid Station.", Toast.LENGTH_SHORT).show();
                 }
             });
+            
             AutoStationItemAdapter adapter = new AutoStationItemAdapter(context, StationList);
             source.setAdapter(adapter);
             destination.setAdapter(adapter);
@@ -174,7 +191,7 @@ public class TrackingFragment extends Fragment {
 
     }
 
-    private void makeApiRequest(String searchText) {
+    private void makeApiRequest(String searchText,boolean liveapi) {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -231,6 +248,7 @@ public class TrackingFragment extends Fragment {
                                             Intent intent = new Intent(getActivity(), LiveTrain.class);
                                             intent.putExtra("train_name",trains.get(i).getTName());
                                             intent.putExtra("train_no",trains.get(i).getTNumber());
+                                            intent.putExtra("liveapi",liveapi);
                                             startActivity(intent);
                                         }
                                     });

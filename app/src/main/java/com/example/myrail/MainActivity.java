@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,17 +26,41 @@ public class MainActivity extends AppCompatActivity {
     ReservationFragment rf = new ReservationFragment();
     MonitorFragment mf = new MonitorFragment();
     BottomNavigationView bn;
-    TextView dt;
-    private Button db;
+    private ImageButton nav_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        Log.d("lapi", "onCreate: Activity Created");
         bn = findViewById(R.id.bottom_nav);
+        nav_button = findViewById(R.id.nav_btn);
+        final boolean[] liveapi = {false};
+
+
+        nav_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.live) {
+                            liveapi[0] = true;
+                            Log.d("lapi", "onCreateView: "+liveapi[0]);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                popupMenu.inflate(R.menu.nav);
+                popupMenu.show();
+            }
+        });
+
+
+
         if(savedInstanceState == null){
         getSupportFragmentManager().beginTransaction().replace(R.id.container,tf).commit();
         }
@@ -41,15 +69,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                     if(item.getItemId() == R.id.Tracking){
-                       ReplaceF(tf);
+                       ReplaceF(tf,liveapi[0]);
                         return true;
                     }
                     else if(item.getItemId() == R.id.Reserve) {
-                        ReplaceF(rf);
+                        ReplaceF(rf,liveapi[0]);
                         return true;
                     }
                     else if(item.getItemId() == R.id.Monitor) {
-                        ReplaceF(mf);
+                        ReplaceF(mf,liveapi[0]);
                         return true;
                     }
             return false;
@@ -57,13 +85,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar,menu);
-        return true;
-    }
+    public void ReplaceF(Fragment f,boolean lapi){
 
-    public void ReplaceF(Fragment f){
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("liveapi", lapi);
+        Log.d("lapi", "onCreateView: "+lapi);
+        f.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,f).addToBackStack(null).commit();
     }
 }

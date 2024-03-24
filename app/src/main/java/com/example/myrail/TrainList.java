@@ -43,6 +43,8 @@ public class TrainList extends AppCompatActivity {
         String dst = intent.getStringExtra("Dst");
         String sc = intent.getStringExtra("sc");
         String dc = intent.getStringExtra("dc");
+        boolean liveapi = intent.getBooleanExtra("liveapi",false);
+        Log.d("lapi", "onCreateView: "+liveapi);
         Log.d("intent", "onCreate: " + sc + " and " + dc);
 
         src_label.setText(src);
@@ -53,32 +55,46 @@ public class TrainList extends AppCompatActivity {
         String formattedDate = sdf.format(today);
 
         ArrayList<TrainListPage> trainlistpage = new ArrayList<>();
-//        dummytraindata(trainlistpage);
 
-        try {
-            makejsonrequest(trainlistpage);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+
+        if(liveapi == true){
+//            try {
+//                makeapirequest(trainlistpage,sc,dc,formattedDate,liveapi);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+            src_label.setText("True");
+            try {
+                makejsonrequest(trainlistpage);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            train_list.setOnItemClickListener((adapterView, view, i, l) -> {
+                Intent intent1 = new Intent(this, LiveTrain.class);
+                intent1.putExtra("train_name", trainlistpage.get(i).getTrainName());
+                intent1.putExtra("train_no", trainlistpage.get(i).getTrainNumber());
+                intent1.putExtra("liveapi",liveapi);
+                startActivity(intent1);
+            });
+        } else {
+            try {
+                makejsonrequest(trainlistpage);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            train_list.setOnItemClickListener((adapterView, view, i, l) -> {
+                Intent intent1 = new Intent(this, LiveTrain.class);
+                intent1.putExtra("train_name", trainlistpage.get(i).getTrainName());
+                intent1.putExtra("train_no", trainlistpage.get(i).getTrainNumber());
+                intent1.putExtra("liveapi",liveapi);
+                startActivity(intent1);
+            });
         }
-
-        train_list.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent intent1 = new Intent(this,LiveTrain.class);
-            intent1.putExtra("train_name",trainlistpage.get(i).getTrainName());
-            intent1.putExtra("train_no",trainlistpage.get(i).getTrainNumber());
-            startActivity(intent1);
-        });
-
-        // ----------------------------MAIN API TO BE USED----------------------------------- //
-//        try {
-//           makeapirequest(trainlistpage,sc,dc,formattedDate);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-
     }
 
-    private void makeapirequest(ArrayList<TrainListPage> trainlistpage, String sc, String dc,String formattedDate) throws IOException {
+    private void makeapirequest(ArrayList<TrainListPage> trainlistpage, String sc, String dc,String formattedDate, boolean liveapi) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -154,6 +170,14 @@ public class TrainList extends AppCompatActivity {
                                 TrainListAdapter adapter = new TrainListAdapter(TrainList.this, R.layout.train_list_adapter, trainlistpage);
                                 Log.d("trainlist", "run: " + trainlistpage);
                                 train_list.setAdapter(adapter);
+
+                                train_list.setOnItemClickListener((adapterView, view, i, l) -> {
+                                    Intent intent1 = new Intent(TrainList.this,LiveTrain.class);
+                                    intent1.putExtra("train_name",trainlistpage.get(i).getTrainName());
+                                    intent1.putExtra("train_no",trainlistpage.get(i).getTrainNumber());
+                                    intent1.putExtra("liveapi",liveapi);
+                                    startActivity(intent1);
+                                });
                             }
                         });
                     } catch (JSONException e) {
@@ -166,16 +190,6 @@ public class TrainList extends AppCompatActivity {
         });
     }
 
-
-//        public void dummytraindata(ArrayList<TrainListPage> trainlistpage){
-//        trainlistpage.add(new TrainListPage("12010","Intercity","19:00-21:30"));
-//        trainlistpage.add(new TrainListPage("12320","Rajdhani","04:00-09:30"));
-//        trainlistpage.add(new TrainListPage("32010","Karnawati","11:00-12:22"));
-//        trainlistpage.add(new TrainListPage("12320","Local","09:42-14:00"));
-//        trainlistpage.add(new TrainListPage("19312","Super Fast","19:23-00:21"));
-//        trainlistpage.add(new TrainListPage("07126","Hazrat Nizamuddin","13:05-19:55"));
-//        trainlistpage.add(new TrainListPage("94212","Vande Bharat","05:22-11:47"));
-//        }
 
     private void makejsonrequest(ArrayList<TrainListPage> trainlistpage) throws JSONException {
 
