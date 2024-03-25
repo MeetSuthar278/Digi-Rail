@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -46,13 +49,22 @@ import okhttp3.Response;
 
 public class TrackingFragment extends Fragment {
 
+    private static final String STATION_LIST_JSON_KEY = "station_list_json";
+
     private TextView source_code,destination_code,textViewIcon,label;
     private AutoCompleteTextView source,destination,train_name_no;
     private ImageButton train_search, exchange;
     private Button submit;
     private  String st;
-    private List<StationItem> StationList;
+    private ArrayList<StationItem> StationList;
     private ListView train_name_dialog;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +81,6 @@ public class TrackingFragment extends Fragment {
             destination_code = v.findViewById(R.id.destination_code);
             label = v.findViewById(R.id.label);
             boolean liveapi = false;
-
 
 
         Bundle args = getArguments();
@@ -93,11 +104,9 @@ public class TrackingFragment extends Fragment {
             });
 
 
-
             InputStream inputStream = context.getResources().openRawResource(R.raw.stations);
-
-
             fillStationList(inputStream);
+
 
 
             source.setOnItemClickListener((adapterView, view, i, l) -> {
@@ -151,7 +160,7 @@ public class TrackingFragment extends Fragment {
                     Toast.makeText(context,"Enter Valid Station.", Toast.LENGTH_SHORT).show();
                 }
             });
-            
+
             AutoStationItemAdapter adapter = new AutoStationItemAdapter(context, StationList);
             source.setAdapter(adapter);
             destination.setAdapter(adapter);
@@ -188,8 +197,8 @@ public class TrackingFragment extends Fragment {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
+
 
     private void makeApiRequest(String searchText,boolean liveapi) {
         OkHttpClient client = new OkHttpClient();
@@ -264,4 +273,24 @@ public class TrackingFragment extends Fragment {
             }
         });
     }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("tf", "onDestroyView: destroyed view--------------");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("tf", "onDetach: Detached------------------");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("tf", "onDestroy: destroyed-----------------");
+    }
+
 }
