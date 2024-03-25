@@ -64,7 +64,7 @@ public class AutoStationItemAdapter extends ArrayAdapter<StationItem> {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for (StationItem item : stationListFull) {
-                    if (item.getStationName().toLowerCase().contains(filterPattern)) {
+                    if (item.getStationName().toLowerCase().startsWith(filterPattern)) {
                         suggestions.add(item);
                     }
                 }

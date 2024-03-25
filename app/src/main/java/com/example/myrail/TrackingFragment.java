@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -49,8 +51,6 @@ import okhttp3.Response;
 
 public class TrackingFragment extends Fragment {
 
-    private static final String STATION_LIST_JSON_KEY = "station_list_json";
-
     private TextView source_code,destination_code,textViewIcon,label;
     private AutoCompleteTextView source,destination,train_name_no;
     private ImageButton train_search, exchange;
@@ -63,7 +63,9 @@ public class TrackingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Context context = getContext();
+        InputStream inputStream = context.getResources().openRawResource(R.raw.stations);
+        fillStationList(inputStream);
     }
 
     @Override
@@ -104,33 +106,85 @@ public class TrackingFragment extends Fragment {
             });
 
 
-            InputStream inputStream = context.getResources().openRawResource(R.raw.stations);
-            fillStationList(inputStream);
+
 
 
 
             source.setOnItemClickListener((adapterView, view, i, l) -> {
                     textViewIcon = view.findViewById(R.id.sug_icon_text);
                     source_code.setText(textViewIcon.getText());
+
+            });
+
+            source.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if(charSequence.length() == 0){
+                            source_code.setText("SRC");
+                        }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
             });
 
             destination.setOnItemClickListener((adapterView, view, i, l) -> {
                 textViewIcon = view.findViewById(R.id.sug_icon_text);
                     destination_code.setText(textViewIcon.getText());
+                if(destination.getText().equals("")){
+                    destination_code.setText("DST");
+                }
             });
 
+        destination.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() == 0){
+                    destination_code.setText("DST");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
             exchange.setOnClickListener(view -> {
+                Animation rotate = AnimationUtils.loadAnimation(context,R.anim.xchnge_rotate);
                 String s = source.getText().toString();
                 String d = destination.getText().toString();
                 String sc,dc;
                 sc = source_code.getText().toString();
                 dc = destination_code.getText().toString();
                 if(!s.isEmpty() || !d.isEmpty()){
+                    exchange.startAnimation(rotate);
                     destination.setText(s);
                     source.setText(d);
                     if(sc!="SRC" || dc!="DST"){
-                    source_code.setText(dc);
-                    destination_code.setText(sc);
+                        Log.d("xchange", "onCreateView:  SRC ="+sc+", DST : "+dc);
+                        if(sc.equals("SRC")){
+                          source_code.setText(dc);
+                          destination_code.setText("DST");
+                        } else if(dc.equals("DST")) {
+                            source_code.setText("SRC");
+                            destination_code.setText(sc);
+                        } else {
+                            source_code.setText(dc);
+                            destination_code.setText(sc);
+                        }
                     }
                 }
             });
