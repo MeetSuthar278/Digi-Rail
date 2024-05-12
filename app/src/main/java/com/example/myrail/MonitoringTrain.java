@@ -173,13 +173,13 @@ public class MonitoringTrain extends AppCompatActivity {
 }
 
     private String getCrowdDensity(double percentage) {
-        if (percentage < 35) {
+        if (percentage <=35) {
             return "Very less crowded";
-        } else if (percentage >= 36 && percentage < 55) {
+        } else if (percentage >= 36 && percentage <=55) {
             return "Less crowded";
-        } else if (percentage >= 56 && percentage < 70) {
+        } else if (percentage >= 56 && percentage <=70) {
             return "Moderately crowded";
-        } else if (percentage >= 61 && percentage < 85) {
+        } else if (percentage >= 71 && percentage <=85) {
             return "Crowded";
         } else {
             return "Very crowded";
