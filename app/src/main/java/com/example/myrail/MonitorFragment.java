@@ -116,8 +116,8 @@ public class MonitorFragment extends Fragment {
                                         @Override
                                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                             Intent intent = new Intent(getActivity(), MonitoringTrain.class);
-//                                            intent.putExtra("train_name",trains.get(i).getTName());
-//                                            intent.putExtra("train_no",trains.get(i).getTNumber());
+                                            intent.putExtra("train_name",trains.get(i).getTName());
+                                            intent.putExtra("train_no",trains.get(i).getTNumber());
                                             startActivity(intent);
                                         }
                                     });

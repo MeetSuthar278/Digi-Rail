@@ -58,25 +58,25 @@ public class TrainList extends AppCompatActivity {
 
 
         if(liveapi == true){
-//            try {
-//                makeapirequest(trainlistpage,sc,dc,formattedDate,liveapi);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-            src_label.setText("True");
             try {
-                makejsonrequest(trainlistpage);
-            } catch (JSONException e) {
+                makeapirequest(trainlistpage,sc,dc,formattedDate,liveapi);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            train_list.setOnItemClickListener((adapterView, view, i, l) -> {
-                Intent intent1 = new Intent(this, LiveTrain.class);
-                intent1.putExtra("train_name", trainlistpage.get(i).getTrainName());
-                intent1.putExtra("train_no", trainlistpage.get(i).getTrainNumber());
-                intent1.putExtra("liveapi",liveapi);
-                startActivity(intent1);
-            });
+//            src_label.setText("True");
+//            try {
+//                makejsonrequest(trainlistpage);
+//            } catch (JSONException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            train_list.setOnItemClickListener((adapterView, view, i, l) -> {
+//                Intent intent1 = new Intent(this, LiveTrain.class);
+//                intent1.putExtra("train_name", trainlistpage.get(i).getTrainName());
+//                intent1.putExtra("train_no", trainlistpage.get(i).getTrainNumber());
+//                intent1.putExtra("liveapi",liveapi);
+//                startActivity(intent1);
+//            });
         } else {
             try {
                 makejsonrequest(trainlistpage);

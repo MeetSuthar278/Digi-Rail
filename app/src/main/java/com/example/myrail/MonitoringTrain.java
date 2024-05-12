@@ -1,5 +1,6 @@
 package com.example.myrail;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import okhttp3.Response;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class MonitoringTrain extends AppCompatActivity {
     private CoachListAdapter coachListAdapter;
     private ArrayList<CoachItem> coacharray;
     private RecyclerView coach_list;
-    private TextView mtr_data, mtr_dsp, waitTextView;
+    private TextView mtr_data, mtr_dsp, waitTextView,selectCoachLabel,mlive_trainno,mlive_trainname,mlive_traindate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,24 @@ public class MonitoringTrain extends AppCompatActivity {
         mtr_data = findViewById(R.id.mtr_data);
         mtr_dsp = findViewById(R.id.mtr_des);
         waitTextView = findViewById(R.id.waitTextView);
+        selectCoachLabel = findViewById(R.id.selectCoachLabel);
+        mlive_trainno = findViewById(R.id.mlive_trainno);
+        mlive_trainname = findViewById(R.id.mlive_trainname);
+        mlive_traindate = findViewById(R.id.mlive_traindate);
 
+
+        Intent i1 = getIntent();
+        String train_name = i1.getStringExtra("train_name");
+        String train_no = i1.getStringExtra("train_no");
+
+        mlive_trainno.setText(train_no);
+        mlive_trainname.setText(train_name);
+
+
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+        String formattedDate = sdf.format(today);
+        mlive_traindate.setText(formattedDate);
 
 
         String[] coachid = {"GN","GN","GN","A1","A2","A3","B1","B2","B3","C1","C2","C3","GN","GN","GN"};
@@ -77,6 +97,7 @@ public class MonitoringTrain extends AppCompatActivity {
                 mtr_data.setVisibility(View.GONE);
                 mtr_dsp.setVisibility(View.GONE);
                 waitTextView.setVisibility(View.VISIBLE);
+                selectCoachLabel.setVisibility(View.GONE);
                 String cch = "GN";
 
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResourceId[position]);

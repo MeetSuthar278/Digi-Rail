@@ -377,4 +377,16 @@
             android:textColor="@color/dblue"
             android:background="@drawable/live_next_bg"/>
     </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/mon_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/baseline_airline_seat_recline_extra_24"
+        android:background="@drawable/mon_circle_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="40dp"
+        app:tint="@color/dblue" />
 </RelativeLayout>

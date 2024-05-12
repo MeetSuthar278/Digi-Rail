@@ -8,11 +8,56 @@
     tools:context=".MonitoringTrain"
     android:background="@drawable/background">
 
+    <LinearLayout
+        android:id="@+id/monl"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/dblue">
+
+        <TextView
+            android:id="@+id/mlive_trainno"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="12010"
+            android:gravity="center"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
+            android:background="@drawable/dialog_tnum_bg"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/mlive_trainname"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Intercity Express"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:layout_marginLeft="7.5dp"/>
+
+        <TextView
+            android:id="@+id/mlive_traindate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_gravity="center"
+            android:text="17-03-2024"
+            android:layout_marginRight="15dp"
+            android:textSize="18dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coach_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey"
+        android:layout_below="@+id/monl"
         android:orientation="horizontal"/>
 
     <TextView
@@ -25,6 +70,18 @@
         android:text="Please wait..."
         android:visibility="gone"
         android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/selectCoachLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:layout_centerInParent="true"
+        android:textColor="@color/grey"
+        android:text="Select Coach from above list"
+        android:visibility="visible"
+        android:textSize="25dp"/>
+
 
     <TextView
         android:id="@+id/mtr_data"

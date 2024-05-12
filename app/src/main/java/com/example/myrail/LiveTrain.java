@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.telephony.mbms.StreamingServiceInfo;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import okhttp3.Response;
 public class LiveTrain extends AppCompatActivity {
 
     private Button prev_station,next_station;
+    private ImageButton mon_button;
     private TextView np_label,live_trainno,live_trainname,live_traindate,srcstation,srctime,dststation,dsttime,currentmessage,npsourcecode,npstationname,arrival_time,dept_time;
     private FrameLayout np_station;
     @Override
@@ -57,13 +60,14 @@ public class LiveTrain extends AppCompatActivity {
         npstationname = findViewById(R.id.npstationname);
         arrival_time = findViewById(R.id.arrival_time);
         dept_time = findViewById(R.id.dept_time);
+        mon_button = findViewById(R.id.mon_button);
 
         Intent intent = getIntent();
         String train_name = intent.getStringExtra("train_name");
         boolean liveapi = intent.getBooleanExtra("liveapi",false);
         Log.d("lapi", "onCreateView: "+liveapi);
-//        String train_no = intent.getStringExtra("train_no");
-        String train_no = "20960";
+        String train_no = intent.getStringExtra("train_no");
+        //String train_no = "20960";
 
         Log.d("Live", "onCreate: "+train_no+" , "+train_name);
 
@@ -75,10 +79,16 @@ public class LiveTrain extends AppCompatActivity {
         String formattedDate = sdf.format(today);
         live_traindate.setText(formattedDate);
 
+        mon_button.setOnClickListener(view -> {
+            Intent i = new Intent(this, MonitoringTrain.class);
+            i.putExtra("train_name",train_name);
+            i.putExtra("train_no",train_no);
+            startActivity(i);
+        });
 
         if(liveapi == true) {
-            //makeApiRequest(train_no);
-            currentmessage.setText("True");
+            makeApiRequest(train_no);
+//            currentmessage.setText("True");
         } else {
             try {
                 makejsonrequest(train_no);
