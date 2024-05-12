@@ -8,15 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -26,14 +30,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import java.util.ArrayList;
 
 public class MonitoringTrain extends AppCompatActivity {
 
@@ -152,6 +148,7 @@ public class MonitoringTrain extends AppCompatActivity {
 
                     // Calculate percentage
                     double percentage = (double) count / DEFAULT_TOTAL * 100;
+                    String crowdDensity = getCrowdDensity(percentage);
                     Log.d("percentage", "onResponse: " + percentage);
                     int per = (int) percentage;
                     Log.d("percentage", "onResponse: " + per);
@@ -161,8 +158,8 @@ public class MonitoringTrain extends AppCompatActivity {
                         waitTextView.setVisibility(View.GONE);
                         mtr_data.setVisibility(View.VISIBLE);
                         mtr_dsp.setVisibility(View.VISIBLE);
-                        mtr_data.setText(per + "%");
-                        mtr_dsp.setText("Approximately " + count + " people are present in " + cch + " coach");
+                        mtr_data.setText(crowdDensity);
+                        mtr_dsp.setText("Approximately " + percentage + "% of coach is accupied");
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -174,4 +171,18 @@ public class MonitoringTrain extends AppCompatActivity {
         }
     });
 }
+
+    private String getCrowdDensity(double percentage) {
+        if (percentage < 35) {
+            return "Very less crowded";
+        } else if (percentage >= 36 && percentage < 55) {
+            return "Less crowded";
+        } else if (percentage >= 56 && percentage < 70) {
+            return "Moderately crowded";
+        } else if (percentage >= 61 && percentage < 85) {
+            return "Crowded";
+        } else {
+            return "Very crowded";
+        }
+    }
 }
